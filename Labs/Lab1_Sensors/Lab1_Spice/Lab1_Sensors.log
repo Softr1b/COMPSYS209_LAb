@@ -1,0 +1,14 @@
+LTspice 26.0.2 for MacOS
+Circuit: /Users/user/Desktop/Labs/Lab1_Sensors/Lab1_Spice/Lab1_Sensors.net
+Start Time: Thu Jul 23 17:53:52 2026
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.031 seconds.
+
+Files loaded:
+/Users/user/Desktop/Labs/Lab1_Sensors/Lab1_Spice/Lab1_Sensors.net
+
