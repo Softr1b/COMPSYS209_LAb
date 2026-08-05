@@ -8,16 +8,15 @@
 #include <avr/io.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdint.h>
 
 int main(void)
 {
-	uint16_t limit = 300;
+	int limit = 300;
 	
-	for(uint16_t n = 2; n <= limit; n++) {
+	for(int n = 2; n <= limit; n++) {
 		bool if_prime = true;
 	
-		for (uint16_t i = 2; i * i <= n; i++){
+		for (int i = 2; i * i <= n; i++){
 			if (n % i == 0) {
 				if_prime = false;
 					break;
@@ -25,13 +24,13 @@ int main(void)
 	}
 	
 		if (if_prime) {
-			printf("%u ", n);
+			printf("%d", n);
 		}
 	}
 	
     /* Replace with your application code */
     while (1) 
     {
-	}
+    }
 }
 
