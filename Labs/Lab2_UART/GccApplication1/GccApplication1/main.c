@@ -31,6 +31,7 @@ int main(void) {
 		usart_transmit('3');		//send '3'
 		usart_transmit('4');
 		usart_transmit('5');
+		usart_transmit(' ');
 		_delay_ms(500);		//500ms delay
 	}
 }
