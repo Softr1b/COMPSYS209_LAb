@@ -28,7 +28,9 @@ int main(void) {
 	
 	while (1)
 	{
-		usart_transmit(51);		//send '3'
+		usart_transmit('3');		//send '3'
+		usart_transmit('4');
+		usart_transmit('5');
 		_delay_ms(500);		//500ms delay
 	}
 }
