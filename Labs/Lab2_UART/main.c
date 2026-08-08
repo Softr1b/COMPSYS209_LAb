@@ -12,7 +12,7 @@
 
 int main(void)
 {
-	uint16_t primes[128];
+	uint16_t primes[62];
 	uint16_t count = 0;
 	uint16_t limit = 300;
 	
