@@ -4,9 +4,7 @@
  * Created: 2026/8/5 20:09:29
  * Author : 941107
  */ 
-#ifndef F_CPU
-#ifndef F_CPU 2000000UL
-#endif
+#define  F_CPU 2000000UL
 
 #include <avr/io.h>
 #include <stdbool.h>
