@@ -25,44 +25,47 @@ void usart_transmit(uint8_t data) {
 
 int main(void) {
 	usart_init(12);		//UBRR = 12
+	//the code to find prime number
+	uint16_t primes[62];
+	uint16_t count = 0;
+	uint16_t limit = 300;
 	
-	while (1)
-	{
-		usart_transmit('3');		//send '3'
-		usart_transmit('4');
-		usart_transmit('5');
-		usart_transmit(' ');
-		_delay_ms(500);		//500ms delay
+	for(uint16_t n = 2; n <= limit; n++) {
+		bool if_prime = true;
+	
+		for (uint16_t i = 2; i * i <= n; i++){
+			if (n % i == 0) {
+				if_prime = false;
+				break;
+		}
+	}
+	
+	if (if_prime) {
+		primes[count] = n;
+		count++;
 	}
 }
 
+	while(1) {
+		//use a for loop to print the prime number one by one
+		for (uint16_t i = 0; i < count; i++) {
+			uint16_t num = primes[i];
+			usart_transmit((num / 100) + '0');
+			usart_transmit((num / 10) + '0');
+			usart_transmit((num % 10) + '0');
+		
+			usart_transmit(',');
+			usart_transmit(' ');
+			_delay_ms(500);
+		}
+	
+		usart_transmit('\r');
+		usart_transmit('\n');
+		_delay_ms(2000);
+	}
+	
+	return 0;
+}
 
-//int main(void)
-//{
-//	uint16_t primes[62];
-//	uint16_t count = 0;
-//	uint16_t limit = 300;
-//	
-//	for(uint16_t n = 2; n <= limit; n++) {
-//		bool if_prime = true;
-//	
-//		for (uint16_t i = 2; i * i <= n; i++){
-//			if (n % i == 0) {
-//				if_prime = false;
-//				break;
-//		}
-//	}
-//	
-//		if (if_prime) {
-//			primes[count] = n;
-//			count++;
-//		}
-//	}
-//	
-//    /* Replace with your application code */
-//    while (1) {
-//	}
-//
-//}
 
 

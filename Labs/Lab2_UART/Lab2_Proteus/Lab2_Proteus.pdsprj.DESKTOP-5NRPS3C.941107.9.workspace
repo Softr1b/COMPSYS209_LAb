@@ -1,24 +1,75 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activeWindow="0">
-  <PLACEMENT>01d9d0cb0003000000000110000000330000070b000003b800000111000000520000070a000003b70000000000000000078000000111000000520000070a000003b7</PLACEMENT>
-  <WINDOW mode="00050a01" index="0" module="ISIS" type="default"/>
+  <PLACEMENT>01d9d0cb000300000000000000000000000003bf00000407000000010000001f000003be0000040600000000000000000780000000010000001f000003be00000406</PLACEMENT>
+  <WINDOW type="default" module="ISIS" index="0" mode="00050a01"/>
+  <WINDOW type="default" module="STARTUP" index="0" mode="00050a01"/>
  </FRAME>
- <MODULE name="VSMDEBUG">
-  <PWI/>
- </MODULE>
- <MODULE name="ARES">
-  <editor gridmajor="0" metric="0" xcursor="0" flipped="0" zoom="10" scale="10" gridminor="0" snapidx="3" snaprange="0" gridmode="2" snap="0" orgmode="0">
-   <centre y="0" x="0"/>
-   <origin y="0" x="0"/>
-   <world y1="-12700000" x1="-15240000" y2="12700000" x2="15240000"/>
+ <MODULE name="ISIS">
+  <editor xcursor="0" snapidx="2" gridmajor="25400000" gridminor="508000" zoom="0" metric="0" snap="254000" flipped="0" orgmode="0" snaprange="309756" scale="41" gridmode="2">
+   <centre x="0" y="0"/>
+   <origin x="0" y="0"/>
+   <world y1="-12192000" x1="-18542000" x2="18542000" y2="12192000"/>
   </editor>
  </MODULE>
- <MODULE name="ISIS">
-  <editor gridmajor="2540000" metric="0" xcursor="0" flipped="0" zoom="0" scale="114" gridminor="254000" snapidx="2" snaprange="127000" gridmode="2" snap="254000" orgmode="0">
-   <centre y="4888386" x="-9034081"/>
-   <origin y="0" x="0"/>
-   <world y1="-12192000" x1="-18542000" y2="12192000" x2="18542000"/>
+ <MODULE name="VSMEDIT">
+  <EDITOR/>
+ </MODULE>
+ <MODULE name="VSMDEBUG">
+  <PWI>
+   <POPUP pid="0" x="10" y="21" w="800" iid="-1" flags="00000082" h="200">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="1" x="30" y="41" w="350" iid="-1" flags="000000b2" h="200">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="2" x="50" y="61" w="800" iid="-1" flags="000000a2" h="200">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="0" x="70" y="81" w="450" iid="2" flags="00000022" h="250">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="3" x="90" y="101" w="30" iid="1" flags="00000008" h="16">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="10" x="0" y="0" w="100" iid="1" flags="0000000a" h="30">
+    <PROPERTIES>
+     <ITEM name="DataType">2</ITEM>
+     <ITEM name="DispChars">Yes</ITEM>
+     <ITEM name="DispFormat">2</ITEM>
+     <ITEM name="ShowChanges">Yes</ITEM>
+     <ITEM name="ShowToolTips">Yes</ITEM>
+     <ITEM name="TopLineAddress">00000000</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP pid="6" x="130" y="141" w="8" iid="1" flags="0000000a" h="32">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="7" x="150" y="161" w="16" iid="1" flags="0000000a" h="32">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="14" x="170" y="181" w="16" iid="1" flags="80000000" h="32">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="4" x="190" y="201" w="16" iid="1" flags="0000000a" h="32">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="13" x="210" y="221" w="16" iid="1" flags="0000000a" h="8">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="1" x="230" y="241" w="600" iid="1" flags="0000000b" h="400">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP pid="2" x="250" y="261" w="300" iid="1" flags="0000000b" h="300">
+    <PROPERTIES/>
+   </POPUP>
+  </PWI>
+ </MODULE>
+ <MODULE name="ARES">
+  <editor xcursor="0" snapidx="3" gridmajor="0" gridminor="0" zoom="10" metric="0" snap="0" flipped="0" orgmode="0" snaprange="0" scale="10" gridmode="2">
+   <centre x="0" y="0"/>
+   <origin x="0" y="0"/>
+   <world y1="-12700000" x1="-15240000" x2="15240000" y2="12700000"/>
   </editor>
  </MODULE>
 </WORKSPACE>
