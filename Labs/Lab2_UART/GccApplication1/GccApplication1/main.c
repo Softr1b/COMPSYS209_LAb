@@ -51,17 +51,13 @@ int main(void) {
 		for (uint16_t i = 0; i < count; i++) {
 			uint16_t num = primes[i];
 			usart_transmit((num / 100) + '0');
-			usart_transmit((num / 10) + '0');
+			usart_transmit((num / 10) % 10 + '0');
 			usart_transmit((num % 10) + '0');
 		
 			usart_transmit(',');
 			usart_transmit(' ');
 			_delay_ms(500);
 		}
-	
-		usart_transmit('\r');
-		usart_transmit('\n');
-		_delay_ms(2000);
 	}
 	
 	return 0;
