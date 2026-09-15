@@ -37,7 +37,6 @@ void uart_send_num(uint16_t num) {
 		uart_send_char(buf[--i]);
 	}
 }
-// ----------------------------
 
 int main(void) {
 	uint16_t adc0_samples[NUM_SAMPLES];
