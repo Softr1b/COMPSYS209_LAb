@@ -24,8 +24,8 @@ int main(void){
 	sei(); 
 	
 	while(1){
-		if(timer0_check_clear_compare()) {
-			led_toggle();
-		}
+// 		if(timer0_check_clear_compare()) {
+// 			led_toggle();
+// 		}
 	}
 }
