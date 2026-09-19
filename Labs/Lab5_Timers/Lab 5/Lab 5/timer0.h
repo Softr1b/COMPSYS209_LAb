@@ -10,6 +10,13 @@ void timer0_init();
 //Using polling check if timer0 has reached comparision value
 //if so, it will clear the compare flag and return 1
 //otherwise, it returns 0
-uint8_t timer0_check_clear_compare();
+
+// 	uint8_t timer0_check_clear_compare();
+
+void timer0_init(void);
+void timer0_start(void);
+void timer0_stop(void);
+uint32_t timer0_get_ticks(void);
+
 
 #endif
