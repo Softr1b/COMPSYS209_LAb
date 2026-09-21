@@ -9,25 +9,26 @@ volatile uint8_t counter = 0;
 
 ISR(TIMER0_COMPA_vect) {
 	counter++;
-	if (counter == 10)
-	{
-		counter =0;
-		led_toggle();
-	}
+// 		if (counter == 10)
+// 		{
+// 			counter =0;
+// 			led_toggle();
+// 		}
 }
 
 void timer0_init() {
 	TCCR0A = (0 << WGM00);
 	TCCR0A = (0 << WGM01);
 	TCCR0B = (0 << WGM02);
-	TCCR0B = (1 << CS02);
+// 		TCCR0B = (1 << CS02);
 	OCR0A = (78);
-	TIMSK0 |= (1 << OCIE0A;)
+	TIMSK0 |= (1 << OCIE0A);
 }
 
 void timer0_start(void) {
 	TCNT0 = (0x00);              
-	counter = 0;            
+	counter = 0;   
+	TCCR0B = (1 << CS02);         
 }
 
 void timer0_stop(void) {
