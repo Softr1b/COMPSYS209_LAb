@@ -3,31 +3,31 @@ LAB6.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000000a  00800100  00000136  000001ca  2**0
+  0 .data         0000000a  00800100  000001f2  00000286  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000136  00000000  00000000  00000094  2**1
+  1 .text         000001f2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000001  0080010a  0080010a  000001d4  2**0
+  2 .bss          00000002  0080010a  0080010a  00000290  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000001d4  2**0
+  3 .comment      00000030  00000000  00000000  00000290  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000204  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002c0  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000028  00000000  00000000  00000244  2**0
+  5 .debug_aranges 00000038  00000000  00000000  00000300  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000799  00000000  00000000  0000026c  2**0
+  6 .debug_info   00000810  00000000  00000000  00000338  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000006e0  00000000  00000000  00000a05  2**0
+  7 .debug_abbrev 00000719  00000000  00000000  00000b48  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000002a3  00000000  00000000  000010e5  2**0
+  8 .debug_line   0000031d  00000000  00000000  00001261  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000034  00000000  00000000  00001388  2**2
+  9 .debug_frame  0000009c  00000000  00000000  00001580  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000003ad  00000000  00000000  000013bc  2**0
+ 10 .debug_str    000003cd  00000000  00000000  0000161c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000000a6  00000000  00000000  00001769  2**0
+ 11 .debug_loc    000001ad  00000000  00000000  000019e9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000018  00000000  00000000  0000180f  2**0
+ 12 .debug_ranges 00000028  00000000  00000000  00001b96  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -47,7 +47,7 @@ Disassembly of section .text:
   2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 71 00 	jmp	0xe2	; 0xe2 <__vector_14>
   3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -72,7 +72,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e6 e3       	ldi	r30, 0x36	; 54
+  7a:	e2 ef       	ldi	r30, 0xF2	; 242
   7c:	f1 e0       	ldi	r31, 0x01	; 1
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -91,37 +91,36 @@ Disassembly of section .text:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	ab 30       	cpi	r26, 0x0B	; 11
+  94:	ac 30       	cpi	r26, 0x0C	; 12
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 65 00 	call	0xca	; 0xca <main>
-  9e:	0c 94 99 00 	jmp	0x132	; 0x132 <_exit>
+  9a:	0e 94 c4 00 	call	0x188	; 0x188 <main>
+  9e:	0c 94 f7 00 	jmp	0x1ee	; 0x1ee <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-000000a6 <disPlay>:
-uint8_t numbers[10] = {
-	0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F
-};
+000000a6 <show_num>:
+volatile uint8_t counter = 0;       // 0 ~ 99 计数器
+volatile uint8_t active_digit = 0;  // 0: 显示十位, 1: 显示个位
 
-void disPlay(uint8_t count) {
-	uint8_t pattern = numbers[count];
+// 输出段码 (a~f 送 PC0~PC5，g 送 PB4)
+void show_num(uint8_t num) {
+	uint8_t pattern = numbers[num];
   a6:	e8 2f       	mov	r30, r24
   a8:	f0 e0       	ldi	r31, 0x00	; 0
   aa:	e0 50       	subi	r30, 0x00	; 0
   ac:	ff 4f       	sbci	r31, 0xFF	; 255
   ae:	80 81       	ld	r24, Z
-	
 	PORTC = (pattern & 0x3F);
   b0:	98 2f       	mov	r25, r24
   b2:	9f 73       	andi	r25, 0x3F	; 63
   b4:	98 b9       	out	0x08, r25	; 8
-
+	
 	if (pattern & (1 << 6)) {
   b6:	86 ff       	sbrs	r24, 6
-  b8:	04 c0       	rjmp	.+8      	; 0xc2 <disPlay+0x1c>
-		PORTB |= (1 << PB4); 
+  b8:	04 c0       	rjmp	.+8      	; 0xc2 <show_num+0x1c>
+		PORTB |= (1 << PB4);
   ba:	85 b1       	in	r24, 0x05	; 5
   bc:	80 61       	ori	r24, 0x10	; 16
   be:	85 b9       	out	0x05, r24	; 5
@@ -133,104 +132,228 @@ void disPlay(uint8_t count) {
   c6:	85 b9       	out	0x05, r24	; 5
   c8:	08 95       	ret
 
-000000ca <main>:
+000000ca <timer0_init>:
+	}
 }
 
+// Timer0 定时器初始化 (5ms 响一次闹钟)
+void timer0_init(void) {
+	TCCR0A = (1 << WGM01);              // CTC 模式
+  ca:	82 e0       	ldi	r24, 0x02	; 2
+  cc:	84 bd       	out	0x24, r24	; 36
+	TCCR0B = (1 << CS02) | (1 << CS00); // 1024 预分频
+  ce:	85 e0       	ldi	r24, 0x05	; 5
+  d0:	85 bd       	out	0x25, r24	; 37
+	OCR0A = 97;                         // 20MHz 下约 5ms
+  d2:	81 e6       	ldi	r24, 0x61	; 97
+  d4:	87 bd       	out	0x27, r24	; 39
+	TIMSK0 |= (1 << OCIE0A);            // 开启比较匹配中断
+  d6:	ee e6       	ldi	r30, 0x6E	; 110
+  d8:	f0 e0       	ldi	r31, 0x00	; 0
+  da:	80 81       	ld	r24, Z
+  dc:	82 60       	ori	r24, 0x02	; 2
+  de:	80 83       	st	Z, r24
+  e0:	08 95       	ret
+
+000000e2 <__vector_14>:
+}
+
+// 定时器中断：只负责背景里的数码管高频刷新，不干扰主程序
+ISR(TIMER0_COMPA_vect) {
+  e2:	1f 92       	push	r1
+  e4:	0f 92       	push	r0
+  e6:	0f b6       	in	r0, 0x3f	; 63
+  e8:	0f 92       	push	r0
+  ea:	11 24       	eor	r1, r1
+  ec:	2f 93       	push	r18
+  ee:	3f 93       	push	r19
+  f0:	4f 93       	push	r20
+  f2:	5f 93       	push	r21
+  f4:	6f 93       	push	r22
+  f6:	7f 93       	push	r23
+  f8:	8f 93       	push	r24
+  fa:	9f 93       	push	r25
+  fc:	af 93       	push	r26
+  fe:	bf 93       	push	r27
+ 100:	ef 93       	push	r30
+ 102:	ff 93       	push	r31
+	uint8_t shi = counter / 10; // 算十位
+ 104:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <counter>
+ 108:	9d ec       	ldi	r25, 0xCD	; 205
+ 10a:	89 9f       	mul	r24, r25
+ 10c:	81 2d       	mov	r24, r1
+ 10e:	11 24       	eor	r1, r1
+ 110:	28 2f       	mov	r18, r24
+ 112:	26 95       	lsr	r18
+ 114:	26 95       	lsr	r18
+ 116:	26 95       	lsr	r18
+	uint8_t ge  = counter % 10; // 算个位
+ 118:	30 91 0b 01 	lds	r19, 0x010B	; 0x80010b <counter>
+ 11c:	39 9f       	mul	r19, r25
+ 11e:	81 2d       	mov	r24, r1
+ 120:	11 24       	eor	r1, r1
+ 122:	86 95       	lsr	r24
+ 124:	86 95       	lsr	r24
+ 126:	86 95       	lsr	r24
+ 128:	88 0f       	add	r24, r24
+ 12a:	98 2f       	mov	r25, r24
+ 12c:	99 0f       	add	r25, r25
+ 12e:	99 0f       	add	r25, r25
+ 130:	89 0f       	add	r24, r25
+ 132:	38 1b       	sub	r19, r24
+ 134:	83 2f       	mov	r24, r19
+
+	// 先关闭所有显示 (消影)
+	PORTB |= (1 << PB0) | (1 << PB1);
+ 136:	95 b1       	in	r25, 0x05	; 5
+ 138:	93 60       	ori	r25, 0x03	; 3
+ 13a:	95 b9       	out	0x05, r25	; 5
+
+	// 交替点亮十位和个位
+	if (active_digit == 0) {
+ 13c:	90 91 0a 01 	lds	r25, 0x010A	; 0x80010a <__data_end>
+ 140:	91 11       	cpse	r25, r1
+ 142:	0a c0       	rjmp	.+20     	; 0x158 <__vector_14+0x76>
+		show_num(shi);
+ 144:	82 2f       	mov	r24, r18
+ 146:	0e 94 53 00 	call	0xa6	; 0xa6 <show_num>
+		PORTB &= ~(1 << PB0); // 点亮 Ds1
+ 14a:	85 b1       	in	r24, 0x05	; 5
+ 14c:	8e 7f       	andi	r24, 0xFE	; 254
+ 14e:	85 b9       	out	0x05, r24	; 5
+		active_digit = 1;
+ 150:	81 e0       	ldi	r24, 0x01	; 1
+ 152:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <__data_end>
+ 156:	07 c0       	rjmp	.+14     	; 0x166 <__vector_14+0x84>
+		} else {
+		show_num(ge);
+ 158:	0e 94 53 00 	call	0xa6	; 0xa6 <show_num>
+		PORTB &= ~(1 << PB1); // 点亮 Ds2
+ 15c:	85 b1       	in	r24, 0x05	; 5
+ 15e:	8d 7f       	andi	r24, 0xFD	; 253
+ 160:	85 b9       	out	0x05, r24	; 5
+		active_digit = 0;
+ 162:	10 92 0a 01 	sts	0x010A, r1	; 0x80010a <__data_end>
+	}
+}
+ 166:	ff 91       	pop	r31
+ 168:	ef 91       	pop	r30
+ 16a:	bf 91       	pop	r27
+ 16c:	af 91       	pop	r26
+ 16e:	9f 91       	pop	r25
+ 170:	8f 91       	pop	r24
+ 172:	7f 91       	pop	r23
+ 174:	6f 91       	pop	r22
+ 176:	5f 91       	pop	r21
+ 178:	4f 91       	pop	r20
+ 17a:	3f 91       	pop	r19
+ 17c:	2f 91       	pop	r18
+ 17e:	0f 90       	pop	r0
+ 180:	0f be       	out	0x3f, r0	; 63
+ 182:	0f 90       	pop	r0
+ 184:	1f 90       	pop	r1
+ 186:	18 95       	reti
+
+00000188 <main>:
 
 int main(void)
 {
+	// 1. 按键引脚配置 (PB7 输入 + 开启内部上拉)
 	DDRB &= ~(1 << PB7);
-  ca:	84 b1       	in	r24, 0x04	; 4
-  cc:	8f 77       	andi	r24, 0x7F	; 127
-  ce:	84 b9       	out	0x04, r24	; 4
+ 188:	84 b1       	in	r24, 0x04	; 4
+ 18a:	8f 77       	andi	r24, 0x7F	; 127
+ 18c:	84 b9       	out	0x04, r24	; 4
 	PORTB |= (1 << PB7);
-  d0:	85 b1       	in	r24, 0x05	; 5
-  d2:	80 68       	ori	r24, 0x80	; 128
-  d4:	85 b9       	out	0x05, r24	; 5
+ 18e:	85 b1       	in	r24, 0x05	; 5
+ 190:	80 68       	ori	r24, 0x80	; 128
+ 192:	85 b9       	out	0x05, r24	; 5
 	
+	// 2. 显示控制引脚配置 (PB0, PB1 位选，PB4 控制 g 段)
 	DDRB |= (1 << PB0) | (1 << PB1);
-  d6:	84 b1       	in	r24, 0x04	; 4
-  d8:	83 60       	ori	r24, 0x03	; 3
-  da:	84 b9       	out	0x04, r24	; 4
+ 194:	84 b1       	in	r24, 0x04	; 4
+ 196:	83 60       	ori	r24, 0x03	; 3
+ 198:	84 b9       	out	0x04, r24	; 4
 	DDRB |= (1 << PB4);
-  dc:	84 b1       	in	r24, 0x04	; 4
-  de:	80 61       	ori	r24, 0x10	; 16
-  e0:	84 b9       	out	0x04, r24	; 4
-	DDRC = (0xFF);
-  e2:	8f ef       	ldi	r24, 0xFF	; 255
-  e4:	87 b9       	out	0x07, r24	; 7
-
-	PORTB |= (1 << PB0);
-  e6:	85 b1       	in	r24, 0x05	; 5
-  e8:	81 60       	ori	r24, 0x01	; 1
-  ea:	85 b9       	out	0x05, r24	; 5
-	PORTB &= ~(1 << PB1);
-  ec:	85 b1       	in	r24, 0x05	; 5
-  ee:	8d 7f       	andi	r24, 0xFD	; 253
-  f0:	85 b9       	out	0x05, r24	; 5
+ 19a:	84 b1       	in	r24, 0x04	; 4
+ 19c:	80 61       	ori	r24, 0x10	; 16
+ 19e:	84 b9       	out	0x04, r24	; 4
 	
-    /* Replace with your application code */
-    while (1) {
-		if (counter > 9) {
-  f2:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <__data_end>
-  f6:	8a 30       	cpi	r24, 0x0A	; 10
-  f8:	10 f0       	brcs	.+4      	; 0xfe <main+0x34>
-			counter = 0;
-  fa:	10 92 0a 01 	sts	0x010A, r1	; 0x80010a <__data_end>
-		}
-		
-		disPlay(counter);
-  fe:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <__data_end>
- 102:	0e 94 53 00 	call	0xa6	; 0xa6 <disPlay>
-		
+	// 3. 段码引脚配置 (PORTC 全输出)
+	DDRC = (0xFF);
+ 1a0:	8f ef       	ldi	r24, 0xFF	; 255
+ 1a2:	87 b9       	out	0x07, r24	; 7
+
+	// 4. 初始位选状态 (Ds1 关闭，Ds2 开启)
+	PORTB |= (1 << PB0);
+ 1a4:	85 b1       	in	r24, 0x05	; 5
+ 1a6:	81 60       	ori	r24, 0x01	; 1
+ 1a8:	85 b9       	out	0x05, r24	; 5
+	PORTB &= ~(1 << PB1);
+ 1aa:	85 b1       	in	r24, 0x05	; 5
+ 1ac:	8d 7f       	andi	r24, 0xFD	; 253
+ 1ae:	85 b9       	out	0x05, r24	; 5
+	
+	// 5. 启动 Timer0 定时器和总中断
+	timer0_init();
+ 1b0:	0e 94 65 00 	call	0xca	; 0xca <timer0_init>
+	sei();
+ 1b4:	78 94       	sei
+
+	while (1) {
+		// 主循环：每 100ms 检查一次 PB7 按键
 		for (uint8_t i = 0; i < 10; i++) {
- 106:	80 e0       	ldi	r24, 0x00	; 0
- 108:	0c c0       	rjmp	.+24     	; 0x122 <main+0x58>
+ 1b6:	80 e0       	ldi	r24, 0x00	; 0
+ 1b8:	0c c0       	rjmp	.+24     	; 0x1d2 <main+0x4a>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 10a:	ef e4       	ldi	r30, 0x4F	; 79
- 10c:	f3 ec       	ldi	r31, 0xC3	; 195
- 10e:	31 97       	sbiw	r30, 0x01	; 1
- 110:	f1 f7       	brne	.-4      	; 0x10e <main+0x44>
- 112:	00 c0       	rjmp	.+0      	; 0x114 <main+0x4a>
- 114:	00 00       	nop
+ 1ba:	ef e4       	ldi	r30, 0x4F	; 79
+ 1bc:	f3 ec       	ldi	r31, 0xC3	; 195
+ 1be:	31 97       	sbiw	r30, 0x01	; 1
+ 1c0:	f1 f7       	brne	.-4      	; 0x1be <main+0x36>
+ 1c2:	00 c0       	rjmp	.+0      	; 0x1c4 <main+0x3c>
+ 1c4:	00 00       	nop
 			_delay_ms(10);
-			
-			if (!(PINB & (1 << PB7)))
- 116:	1f 99       	sbic	0x03, 7	; 3
- 118:	03 c0       	rjmp	.+6      	; 0x120 <main+0x56>
-			{
-				counter = 0;
- 11a:	10 92 0a 01 	sts	0x010A, r1	; 0x80010a <__data_end>
+
+			// 按键按下 (低电平)
+			if (!(PINB & (1 << PB7))) {
+ 1c6:	1f 99       	sbic	0x03, 7	; 3
+ 1c8:	03 c0       	rjmp	.+6      	; 0x1d0 <main+0x48>
+				counter = 0; // 计数器归零
+ 1ca:	10 92 0b 01 	sts	0x010B, r1	; 0x80010b <counter>
 				break;
- 11e:	03 c0       	rjmp	.+6      	; 0x126 <main+0x5c>
-			counter = 0;
-		}
-		
-		disPlay(counter);
-		
+ 1ce:	03 c0       	rjmp	.+6      	; 0x1d6 <main+0x4e>
+	timer0_init();
+	sei();
+
+	while (1) {
+		// 主循环：每 100ms 检查一次 PB7 按键
 		for (uint8_t i = 0; i < 10; i++) {
- 120:	8f 5f       	subi	r24, 0xFF	; 255
- 122:	8a 30       	cpi	r24, 0x0A	; 10
- 124:	90 f3       	brcs	.-28     	; 0x10a <main+0x40>
-			{
-				counter = 0;
+ 1d0:	8f 5f       	subi	r24, 0xFF	; 255
+ 1d2:	8a 30       	cpi	r24, 0x0A	; 10
+ 1d4:	90 f3       	brcs	.-28     	; 0x1ba <main+0x32>
 				break;
 			}
 		}
-	counter++;
- 126:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <__data_end>
- 12a:	8f 5f       	subi	r24, 0xFF	; 255
- 12c:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <__data_end>
-	}
- 130:	e0 cf       	rjmp	.-64     	; 0xf2 <main+0x28>
 
-00000132 <_exit>:
- 132:	f8 94       	cli
+		// 1 秒加一次数 (0~99 循环)
+		counter++;
+ 1d6:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <counter>
+ 1da:	8f 5f       	subi	r24, 0xFF	; 255
+ 1dc:	80 93 0b 01 	sts	0x010B, r24	; 0x80010b <counter>
+		if (counter > 99) {
+ 1e0:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <counter>
+ 1e4:	84 36       	cpi	r24, 0x64	; 100
+ 1e6:	38 f3       	brcs	.-50     	; 0x1b6 <main+0x2e>
+			counter = 0;
+ 1e8:	10 92 0b 01 	sts	0x010B, r1	; 0x80010b <counter>
+ 1ec:	e4 cf       	rjmp	.-56     	; 0x1b6 <main+0x2e>
 
-00000134 <__stop_program>:
- 134:	ff cf       	rjmp	.-2      	; 0x134 <__stop_program>
+000001ee <_exit>:
+ 1ee:	f8 94       	cli
+
+000001f0 <__stop_program>:
+ 1f0:	ff cf       	rjmp	.-2      	; 0x1f0 <__stop_program>
