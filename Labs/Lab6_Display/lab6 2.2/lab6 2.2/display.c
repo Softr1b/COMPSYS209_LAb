@@ -50,8 +50,7 @@ void send_next_character_to_display(void) {
 		PORTC &= ~(1 << PC3);
 	}
 
-	PORTD |= 0xF0;
-
+	PORTD |= (1 << PD4) | (1 << PD5) | (1 << PD6) | (1 << PD7);
 	PORTC |= (1 << PC5);
 	PORTC &= ~(1 << PC5);
 

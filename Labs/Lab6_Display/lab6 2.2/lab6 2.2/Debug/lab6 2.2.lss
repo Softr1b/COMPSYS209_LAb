@@ -362,11 +362,10 @@ void send_next_character_to_display(void) {
 		PORTC &= ~(1 << PC3);
 	}
 
-	PORTD |= 0xF0;
+	PORTD |= (1 << PD4) | (1 << PD5) | (1 << PD6) | (1 << PD7);
  256:	8b b1       	in	r24, 0x0b	; 11
  258:	80 6f       	ori	r24, 0xF0	; 240
  25a:	8b b9       	out	0x0b, r24	; 11
-
 	PORTC |= (1 << PC5);
  25c:	88 b1       	in	r24, 0x08	; 8
  25e:	80 62       	ori	r24, 0x20	; 32
