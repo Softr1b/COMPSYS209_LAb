@@ -1,4 +1,4 @@
-main.d main.o: .././main.c \
+display.d display.o: .././display.c .././display.h \
  e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -9,12 +9,9 @@ main.d main.o: .././main.c \
  e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
- e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
- e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- .././display.h
+ e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
+
+.././display.h:
 
 e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -37,13 +34,3 @@ e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h:
 e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
-
-e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
-
-e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
-
-e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
-
-e:\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
-
-.././display.h:
